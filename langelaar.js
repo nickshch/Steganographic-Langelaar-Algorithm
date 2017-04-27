@@ -18,13 +18,12 @@ function rgbToHsv() {
 
   var hsvX = 0,
       hsvY = 0;
-  hsvMatrix = Array.matrix(height, width, 0);
+  hsvMatrix = Array.matrix(height, width, {});
 
   for (var i = 0; i < data.length; i += 4) {
       var rgbColor = tinycolor({r: data[i], g: data[i+1], b: data[i+2]});
       var hsvColor = rgbColor.toHsv();
-      alert(rgbColor.toHsvString());
-      hsvMatrix[hsvX, hsvY] = hsvColor;
+      hsvMatrix[hsvY][hsvX] = hsvColor;
       hsvX++;
       if (hsvX === width) {
         hsvY++;
