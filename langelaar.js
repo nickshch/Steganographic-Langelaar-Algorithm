@@ -63,6 +63,60 @@ function readKey() {
     reader.readAsText(file);
 }
 
+function langelaar() {
+    var delta = 5,
+    Height = img.height,
+    Width = img.width,
+    keyLength = keyArray.length,
+    n = maskMatrix.length,
+    countZero = 0,
+    countOne = 0;
+
+    for (var i = 0; i < n; i++)
+        for (var j = 0; j < n; j++)
+            if (maskMatrix[i][j] == 0) countZero++;
+    countOne = n*n - countZero;
+
+    var keyIterator = -1;
+    for (var i = 0; i < Height - n; i += n) {
+        for (var j = 0; j < Width - n; j += n) {
+            var sumZero = 0,
+            sumOne = 0;
+            if (keyIterator > keyLength - 2) keyLength --;
+            else keyIterator ++;
+            for (var k = 0; k < n - 1; k++)
+                for (var l = 0; l < n - 1; l++) {
+                    if (maskMatrix[k][l] == 1) sumOne += hsvMatrix[i+k][j+l].v
+                    if (maskMatrix[k][l] == 0) sumZero += hsvMatrix[i+k][j+l].v
+                }
+            var avBrightnessOne = sumOne/countOne;
+            var avBrightnessZero = sumZero/countZero;
+
+            for (var k = 0; k < n - 1; k++){
+                for (var l = 0; l < n - 1; l++) {
+                    var rez = -1;
+                    var hsvValue = hsvMatrix[i+k][j+l].h;
+                    if (maskMatrix[k][l] == 0)
+                        rez = hsvValue;
+                    if (rez == -1 && ( (keyArray[keyIterator] == 1 && (avBrightnessOne <= (avBrightnessZero - delta))) || (keyArray[keyIterator] == 0 && (avBrightnessOne >= (avBrightnessZero + delta))) )
+                        rez = hsvValue;
+                    if (rez == 1 && (keyArray[keyIterator] == 1 && ((hsvValue - ((-avBrightnessZero + delta) + avBrightnessOne)) > 0))
+                        rez = hsvValue - (-avBrightnessZero + delta + avBrightnessOne);
+                    if (rez == -1 && keyArray[keyIterator] == 1)
+                        rez = 0;
+                    if (rez == -1 && (keyArray[keyIterator] == 0 && ((hsvValue + (avBrightnessZero + delta - avBrightnessOne)) < 255))
+                        rez = hsvValue + (avBrightnessZero + delta - avBrightnessOne);
+                    if (rez == -1)
+                        rez = 255;
+
+                    hsvMatrix[i+k][j+l].v = rez;
+                }
+            }
+
+        }
+    }
+}
+
 var ctx = document.getElementById('canvas').getContext('2d'),
     img = new Image(),
     hsvMatrix = [],
@@ -72,3 +126,4 @@ var ctx = document.getElementById('canvas').getContext('2d'),
 document.getElementById("bmpupload").addEventListener("change", draw, false);
 document.getElementById("maskupload").addEventListener("change", readMask, false);
 document.getElementById("keyupload").addEventListener("change", readKey, false);
+document.getElementById("hideButton").addEventListener("click", langelaar, false);
