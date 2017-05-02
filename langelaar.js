@@ -35,8 +35,40 @@ function draw() {
     }
 }
 
-var ctx = document.getElementById('canvas').getContext('2d'),
-    img = new Image();
-    hsvMatrix = [];
+function readMask() {
+    var fileInput = document.getElementById('maskupload');
 
-document.getElementById("bmpupload").addEventListener("change", draw, false)
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+    reader.onload = function() {
+        var text = reader.result;
+        text = text.split(' ').join('');
+        var array = text.split('\n');
+        if (array[array.length - 1] == '') array.pop();
+        maskMatrix = array;
+    }
+    reader.readAsText(file);
+}
+
+function readKey() {
+    var fileInput = document.getElementById('keyupload');
+
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+    reader.onload = function() {
+        var text = reader.result;
+        text = text.replace(/\s/g, '');
+        keyArray = text;
+    }
+    reader.readAsText(file);
+}
+
+var ctx = document.getElementById('canvas').getContext('2d'),
+    img = new Image(),
+    hsvMatrix = [],
+    keyArray = [],
+    maskMatrix = [];
+
+document.getElementById("bmpupload").addEventListener("change", draw, false);
+document.getElementById("maskupload").addEventListener("change", readMask, false);
+document.getElementById("keyupload").addEventListener("change", readKey, false);
