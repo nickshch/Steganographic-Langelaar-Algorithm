@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Langelaar Algorithm</title>
+  </head>
+  <body>
+    <h1>Алгоритм Лангелаара</h1>
+    <div class="openBmpFile">
+      <h3>Загрузить BMP-контейнер со стего</h3>
+      <input type="file" id="bmpstegoupload" accept="image/bmp">
+      <canvas id="canvas" width="0" height="0">
+      Your browser does not support the HTML5 canvas tag.
+      </canvas>
+    </div>
+    <div class="openMaskFile">
+        <h3>Файл с маской:</h3>
+        <input type="file" id="maskupload" accept="text/plain">
+    </div>
+    <button id="extractButton">Extract text</button>
+  </body>
+  <script type='text/javascript' src="langelaardecrypt.js" charset="utf-8"></script>
+  <script type='text/javascript' src="image.js" charset="utf-8"></script>
+  <script type='text/javascript' src="read.js" charset="utf-8"></script>
+  <script type='text/javascript' src='tinycolor.js'></script>
+  <script type='text/javascript' src='array.js'></script>
+  <script type='text/javascript' src='FileSaver.js'></script>
+</html>
