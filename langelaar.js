@@ -115,6 +115,17 @@ function langelaar() {
         }
     }
 
+    var newImageData = ctx.getImageData(0, 0, Width, Height);
+    var data = newImageData.data;
+    var dataIndex = 0;
+    for (var i = 0; i < Height; i++) {
+        for (var j = 0; j < Width; j++) {
+            var rgb = tinycolor(hsvMatrix[i][j]).toRgb();
+            data[dataIndex] = rgb.r;
+            data[dataIndex + 1] = rgb.g;
+            data[dataIndex + 2] = rgb.b;
+            data[dataIndex + 3] = 255;
+            dataIndex += 4;
         }
     }
 }
