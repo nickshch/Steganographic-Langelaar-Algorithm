@@ -130,12 +130,11 @@ function langelaar() {
     }
     ctx.putImageData(newImageData, 0, 0);
 
-    //var link = document.createElement('a');
-    //link.innerHTML = 'Download image';
-    // var link = document.getElementById("download");
-    // link.href = canvas.toDataURL("image/bmp");
-    // link.download = "result.bmp";
-    Canvas2Image.saveAsBMP(canvas, Width, Height);
+    var link = document.createElement('a');
+    link.innerHTML = 'Download image';
+    var link = document.getElementById("download");
+    link.href = CanvasToBMP.toDataURL(canvas);
+    link.download = "result.bmp";
 }
 
 var canvas = document.getElementById('canvas'),
