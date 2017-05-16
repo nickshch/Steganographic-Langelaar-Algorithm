@@ -6,6 +6,6 @@ var canvas = document.getElementById('canvas'),
     maskMatrix = [];
 
 
-document.getElementById("bmpstegoupload").addEventListener("change", function(){draw("bmpstegoupload", img)}, false);
+document.getElementById("bmpstegoupload").addEventListener("change", function(){draw("bmpstegoupload", img, ctx)}, false);
 document.getElementById("maskupload").addEventListener("change", function(){readMask()}, false);
 document.getElementById("extractButton").addEventListener("click", function(){extractText(img.height, img.width, maskMatrix, hsvMatrix, keyArray, ctx)}, false);
