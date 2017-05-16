@@ -9,3 +9,11 @@ Array.matrix = function(numrows, numcols, initial) {
     }
     return arr;
 }
+
+Array.matrix.zeros = function(matrix, size) {
+  result = 0;
+  for (var i = 0; i < size; i++)
+      for (var j = 0; j < size; j++)
+          if (matrix[i][j] == 0) result++;
+  return result;
+}

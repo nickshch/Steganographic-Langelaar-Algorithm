@@ -1,15 +1,9 @@
-function langelaar() {
+function langelaarHideText(Height, Width, maskMatrix, hsvMatrix, keyArray, ctx) {
     var delta = 1/51,
-    Height = img.height,
-    Width = img.width,
     keyLength = keyArray.length,
-    n = maskMatrix.length,
-    countZero = 0,
-    countOne = 0;
+    n = maskMatrix.length;
 
-    for (var i = 0; i < n; i++)
-        for (var j = 0; j < n; j++)
-            if (maskMatrix[i][j] == 0) countZero++;
+    countZero = Array.matrix.zeros(maskMatrix, n);
     countOne = n*n - countZero;
 
     var keyIterator = -1;
@@ -64,24 +58,35 @@ function langelaar() {
         }
     }
     ctx.putImageData(newImageData, 0, 0);
-
-    // var link = document.createElement('a');
-    // link.innerHTML = 'Download image';
-    // var link = document.getElementById("download");
-    // link.href = CanvasToBMP.toDataURL(canvas);
-    // link.download = "result.bmp";
-
     Canvas2Image.saveAsBMP(canvas, Width, Height);
 }
 
-var canvas = document.getElementById('canvas'),
-    ctx = canvas.getContext('2d'),
-    img = new Image(),
-    hsvMatrix = [],
-    keyArray = [],
-    maskMatrix = [];
+function extractText(Height, Width, maskMatrix, hsvMatrix, keyArray, ctx) {
+    var Height = img.height,
+    Width = img.width,
+    n = maskMatrix.length;
 
-document.getElementById("bmpupload").addEventListener("change", function(){draw("bmpupload", img)}, false);
-document.getElementById("maskupload").addEventListener("change", function(){readMask()}, false);
-document.getElementById("keyupload").addEventListener("change", function(){readKey()}, false);
-document.getElementById("hideButton").addEventListener("click", langelaar, false);
+    countZero = Array.matrix.zeros(maskMatrix, n);
+    countOne = n*n - countZero;
+
+    var keyIterator = -1;
+    for (var i = 0; i < Height - n; i += n) {
+        for (var j = 0; j < Width - n; j += n) {
+            var sumZero = 0,
+            sumOne = 0;
+            keyIterator++;
+            for (var k = 0; k < n; k++)
+                for (var l = 0; l < n; l++) {
+                    if (maskMatrix[k][l] == 1) sumOne += hsvMatrix[i+k][j+l].v;
+                    if (maskMatrix[k][l] == 0) sumZero += hsvMatrix[i+k][j+l].v;
+                }
+            var avBrightnessOne = sumOne/countOne;
+            var avBrightnessZero = sumZero/countZero;
+
+            if (avBrightnessOne > avBrightnessZero) keyArray[keyIterator] = 0;
+            else keyArray[keyIterator] = 1;
+        }
+    }
+    var blob = new Blob(keyArray, {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "key_extracted.txt");
+}

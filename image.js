@@ -20,7 +20,7 @@ function rgbToHsv() {
   }
 }
 
-function draw(fileElementId, image) {
+function draw(fileElementId, image, ctx) {
     var f = document.getElementById(fileElementId).files[0],
         url = window.URL || window.webkitURL,
         src = url.createObjectURL(f);
