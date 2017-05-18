@@ -8,16 +8,17 @@
     <h1>Алгоритм Ленгелаара(Langelaar). Занесение txt-стего в bmp контейнер.</h1>
     <div class="openBmpFile">
       <h3>Загрузите BMP-файл для сокрытия в нём информации:</h3>
+      <input type="file" id="bmpupload" accept="image/bmp">
+      <br>
       <canvas id="canvas" width="0" height="0">
         Your browser does not support the HTML5 canvas tag.
       </canvas>
-      <br>
-      <input type="file" id="bmpupload" accept="image/bmp">
     </div>
     <div class="openMaskFile">
         <h3>Загрузите файл с маской:</h3>
         <input type="file" id="maskupload" accept="text/plain">
     </div>
+    <br>
     <div class="openMaskFile">
         <h3>Загрузите файл с ключом:</h3>
         <input type="file" id="keyupload" accept="text/plain">
