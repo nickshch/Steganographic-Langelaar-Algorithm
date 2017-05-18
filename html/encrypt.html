@@ -7,7 +7,7 @@
   <body>
     <h1>Алгоритм Ленгелаара(Langelaar). Занесение txt-стего в bmp контейнер.</h1>
     <div class="openBmpFile">
-      <h3>Загрузите BMP-файл для сокрытия в нём информации:</h3>
+      <h3>1.Загрузите BMP-файл для сокрытия в нём информации:</h3>
       <input type="file" id="bmpupload" accept="image/bmp">
       <br>
       <canvas id="canvas" width="0" height="0">
@@ -15,16 +15,19 @@
       </canvas>
     </div>
     <div class="openMaskFile">
-        <h3>Загрузите файл с маской:</h3>
+        <h3>2.Загрузите файл с маской:</h3>
         <input type="file" id="maskupload" accept="text/plain">
     </div>
     <br>
     <div class="openMaskFile">
-        <h3>Загрузите файл с ключом:</h3>
+        <h3>3.Загрузите файл с ключом:</h3>
         <input type="file" id="keyupload" accept="text/plain">
     </div>
-    <br><br>
-    <button id="hideButton">Скрыть текст в bmp</button>
+    <br>
+    <div class="saveBmmpFile">
+        <h3>4.Нажмите для сохранения bmp со стего:</h3>
+        <button id="hideButton">Скрыть текст в bmp</button>
+    </div>
   </body>
   <script type='text/javascript' src="../js/main_encrypt.js" charset="utf-8"></script>
   <script type='text/javascript' src="../js/langelaar.js" charset="utf-8"></script>
