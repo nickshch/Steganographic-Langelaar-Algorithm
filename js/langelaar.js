@@ -58,7 +58,7 @@ function langelaarHideText(Height, Width, maskMatrix, hsvMatrix, keyArray, ctx) 
         }
     }
     ctx.putImageData(newImageData, 0, 0);
-    Canvas2Image.saveAsBMP(canvas, Width, Height);
+    Canvas2Image.saveAsBMP(canvas, Width, Height, 'result');
 }
 
 function extractText(Height, Width, maskMatrix, hsvMatrix, keyArray, ctx) {
