@@ -9,6 +9,7 @@
     <h1>Алгоритм Ленгелаара(Langelaar). Извлечение txt-стего из bmp контейнера.</h1>
     <div class="openBmpFile">
       <h3>1.Загрузите BMP-контейнер со стего для извлечения информации:</h3>
+      <p>(Файл, в котором ранее была скрыта информация)</p>
       <input type="file" id="bmpstegoupload" accept="image/bmp">
     </div>
     <canvas id="canvas" width="0" height="0">
@@ -16,6 +17,7 @@
     </canvas>
     <div class="openMaskFile">
         <h3>2.Загрузите файл с маской:</h3>
+        <p>(Файл с маской - текстовый файл, в котором находится матрица 8х8, состоящая из 0 и 1.) <a href="../tests/mask.txt">Пример</a></p>
         <input type="file" id="maskupload" accept="text/plain">
     </div>
     <br>
