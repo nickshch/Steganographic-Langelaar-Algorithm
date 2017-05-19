@@ -9,6 +9,7 @@
     <h1>Алгоритм Ленгелаара(Langelaar). Занесение txt-стего в bmp контейнер.</h1>
     <div class="openBmpFile">
       <h3>1.Загрузите BMP-файл для сокрытия в нём информации:</h3>
+      <p>(Подойдет любая картинка формата bmp)</p>
       <input type="file" id="bmpupload" accept="image/bmp">
       <br>
       <canvas id="canvas" width="0" height="0">
@@ -17,11 +18,13 @@
     </div>
     <div class="openMaskFile">
         <h3>2.Загрузите файл с маской:</h3>
+        <p>(Маска - текстовый файл, в котором находится матрица 8х8, состоящая из 0 и 1.) <a href="../tests/mask.txt">Пример</a></p>
         <input type="file" id="maskupload" accept="text/plain">
     </div>
     <br>
     <div class="openMaskFile">
         <h3>3.Загрузите файл с ключом:</h3>
+        <p>(Ключ - текстовый файл, содержащий информацию для встраивания в изображение. Состоит из 0 и 1.) <a href="../tests/key.txt">Пример</a></p>
         <input type="file" id="keyupload" accept="text/plain">
     </div>
     <br>
